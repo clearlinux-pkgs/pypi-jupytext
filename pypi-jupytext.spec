@@ -4,7 +4,7 @@
 #
 Name     : pypi-jupytext
 Version  : 1.13.8
-Release  : 5
+Release  : 6
 URL      : https://files.pythonhosted.org/packages/0a/71/e9a9dca39ab6c211804f5672c6e70789d090f11220f545ad873c66fec16b/jupytext-1.13.8.tar.gz
 Source0  : https://files.pythonhosted.org/packages/0a/71/e9a9dca39ab6c211804f5672c6e70789d090f11220f545ad873c66fec16b/jupytext-1.13.8.tar.gz
 Summary  : Jupyter notebooks as Markdown documents, Julia, Python or R scripts
@@ -96,13 +96,16 @@ python3 components for the pypi-jupytext package.
 %prep
 %setup -q -n jupytext-1.13.8
 cd %{_builddir}/jupytext-1.13.8
+pushd ..
+cp -a jupytext-1.13.8 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1649776443
+export SOURCE_DATE_EPOCH=1653340749
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -113,20 +116,39 @@ export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 -m build --wheel --skip-dependency-check --no-isolation
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+python3 -m build --wheel --skip-dependency-check --no-isolation
+
+popd
 
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-jupytext
+cp %{_builddir}/jupytext-1.13.8/LICENSE %{buildroot}/usr/share/package-licenses/pypi-jupytext/663d0f732d7e77407322ad0fc528b2c9e9c6bbc5
 cp %{_builddir}/jupytext-1.13.8/packages/labextension/LICENSE %{buildroot}/usr/share/package-licenses/pypi-jupytext/6070800810da89afd1bfd1d32e40f9cb79531c0e
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+pip install --root=%{buildroot}-v3 --no-deps --ignore-installed dist/*.whl
+popd
 ## Remove excluded files
 rm -f %{buildroot}*/usr/etc/jupyter/jupyter_notebook_config.d/jupytext.json
 rm -f %{buildroot}*/usr/etc/jupyter/jupyter_server_config.d/jupytext.json
 rm -f %{buildroot}*/usr/etc/jupyter/nbconfig/notebook.d/jupytext.json
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -145,6 +167,7 @@ rm -f %{buildroot}*/usr/etc/jupyter/nbconfig/notebook.d/jupytext.json
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/pypi-jupytext/6070800810da89afd1bfd1d32e40f9cb79531c0e
+/usr/share/package-licenses/pypi-jupytext/663d0f732d7e77407322ad0fc528b2c9e9c6bbc5
 
 %files python
 %defattr(-,root,root,-)
