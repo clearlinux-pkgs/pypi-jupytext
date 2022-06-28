@@ -4,7 +4,7 @@
 #
 Name     : pypi-jupytext
 Version  : 1.13.8
-Release  : 7
+Release  : 8
 URL      : https://files.pythonhosted.org/packages/0a/71/e9a9dca39ab6c211804f5672c6e70789d090f11220f545ad873c66fec16b/jupytext-1.13.8.tar.gz
 Source0  : https://files.pythonhosted.org/packages/0a/71/e9a9dca39ab6c211804f5672c6e70789d090f11220f545ad873c66fec16b/jupytext-1.13.8.tar.gz
 Summary  : Jupyter notebooks as Markdown documents, Julia, Python or R scripts
@@ -105,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656385874
+export SOURCE_DATE_EPOCH=1656396458
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
