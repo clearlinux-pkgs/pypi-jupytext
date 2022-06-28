@@ -4,7 +4,7 @@
 #
 Name     : pypi-jupytext
 Version  : 1.13.8
-Release  : 6
+Release  : 7
 URL      : https://files.pythonhosted.org/packages/0a/71/e9a9dca39ab6c211804f5672c6e70789d090f11220f545ad873c66fec16b/jupytext-1.13.8.tar.gz
 Source0  : https://files.pythonhosted.org/packages/0a/71/e9a9dca39ab6c211804f5672c6e70789d090f11220f545ad873c66fec16b/jupytext-1.13.8.tar.gz
 Summary  : Jupyter notebooks as Markdown documents, Julia, Python or R scripts
@@ -105,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1653340749
+export SOURCE_DATE_EPOCH=1656385874
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -117,8 +117,8 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 -m build --wheel --skip-dependency-check --no-isolation
 pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -msse2avx"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -msse2avx "
 export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
@@ -148,7 +148,7 @@ popd
 rm -f %{buildroot}*/usr/etc/jupyter/jupyter_notebook_config.d/jupytext.json
 rm -f %{buildroot}*/usr/etc/jupyter/jupyter_server_config.d/jupytext.json
 rm -f %{buildroot}*/usr/etc/jupyter/nbconfig/notebook.d/jupytext.json
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
