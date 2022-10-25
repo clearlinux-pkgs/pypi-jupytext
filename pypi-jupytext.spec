@@ -4,7 +4,7 @@
 #
 Name     : pypi-jupytext
 Version  : 1.14.1
-Release  : 15
+Release  : 16
 URL      : https://files.pythonhosted.org/packages/f9/82/41eb391880f4c67b34d2b81e0a13d01801b01507a88e8572c93d4e592972/jupytext-1.14.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/f9/82/41eb391880f4c67b34d2b81e0a13d01801b01507a88e8572c93d4e592972/jupytext-1.14.1.tar.gz
 Summary  : Jupyter notebooks as Markdown documents, Julia, Python or R scripts
@@ -105,7 +105,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1659107825
+export SOURCE_DATE_EPOCH=1666713967
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -130,8 +130,8 @@ popd
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-jupytext
-cp %{_builddir}/jupytext-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/pypi-jupytext/663d0f732d7e77407322ad0fc528b2c9e9c6bbc5
-cp %{_builddir}/jupytext-%{version}/packages/labextension/LICENSE %{buildroot}/usr/share/package-licenses/pypi-jupytext/6070800810da89afd1bfd1d32e40f9cb79531c0e
+cp %{_builddir}/jupytext-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/pypi-jupytext/663d0f732d7e77407322ad0fc528b2c9e9c6bbc5 || :
+cp %{_builddir}/jupytext-%{version}/packages/labextension/LICENSE %{buildroot}/usr/share/package-licenses/pypi-jupytext/6070800810da89afd1bfd1d32e40f9cb79531c0e || :
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
