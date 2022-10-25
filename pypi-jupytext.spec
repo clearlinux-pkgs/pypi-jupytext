@@ -4,7 +4,7 @@
 #
 Name     : pypi-jupytext
 Version  : 1.14.1
-Release  : 14
+Release  : 15
 URL      : https://files.pythonhosted.org/packages/f9/82/41eb391880f4c67b34d2b81e0a13d01801b01507a88e8572c93d4e592972/jupytext-1.14.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/f9/82/41eb391880f4c67b34d2b81e0a13d01801b01507a88e8572c93d4e592972/jupytext-1.14.1.tar.gz
 Summary  : Jupyter notebooks as Markdown documents, Julia, Python or R scripts
