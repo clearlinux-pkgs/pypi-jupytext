@@ -4,17 +4,12 @@
 #
 Name     : pypi-jupytext
 Version  : 1.14.4
-Release  : 18
+Release  : 20
 URL      : https://files.pythonhosted.org/packages/b5/bb/906e4e32833504e1f0df5ba65fea221f323e8272f0bd60d2f9674627c982/jupytext-1.14.4.tar.gz
 Source0  : https://files.pythonhosted.org/packages/b5/bb/906e4e32833504e1f0df5ba65fea221f323e8272f0bd60d2f9674627c982/jupytext-1.14.4.tar.gz
 Summary  : Jupyter notebooks as Markdown documents, Julia, Python or R scripts
 Group    : Development/Tools
 License  : MIT
-Requires: pypi-jupytext-bin = %{version}-%{release}
-Requires: pypi-jupytext-data = %{version}-%{release}
-Requires: pypi-jupytext-license = %{version}-%{release}
-Requires: pypi-jupytext-python = %{version}-%{release}
-Requires: pypi-jupytext-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 BuildRequires : buildreq-qmake
 BuildRequires : pypi(jupyter_packaging)
@@ -26,6 +21,9 @@ BuildRequires : pypi(pyyaml)
 BuildRequires : pypi(setuptools)
 BuildRequires : pypi(toml)
 BuildRequires : pypi(wheel)
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 ![](https://raw.githubusercontent.com/mwouts/jupytext/main/docs/logo_large.png)
@@ -43,56 +41,6 @@ BuildRequires : pypi(wheel)
 [![launch - renku](https://renkulab.io/renku-badge.svg)](https://renkulab.io/projects/best-practices/jupytext/sessions/new?autostart=1)
 [![](https://img.shields.io/badge/YouTube-JupyterCon%202020-red.svg)](https://www.youtube.com/watch?v=SDYdeVfMh48)
 
-%package bin
-Summary: bin components for the pypi-jupytext package.
-Group: Binaries
-Requires: pypi-jupytext-data = %{version}-%{release}
-Requires: pypi-jupytext-license = %{version}-%{release}
-
-%description bin
-bin components for the pypi-jupytext package.
-
-
-%package data
-Summary: data components for the pypi-jupytext package.
-Group: Data
-
-%description data
-data components for the pypi-jupytext package.
-
-
-%package license
-Summary: license components for the pypi-jupytext package.
-Group: Default
-
-%description license
-license components for the pypi-jupytext package.
-
-
-%package python
-Summary: python components for the pypi-jupytext package.
-Group: Default
-Requires: pypi-jupytext-python3 = %{version}-%{release}
-
-%description python
-python components for the pypi-jupytext package.
-
-
-%package python3
-Summary: python3 components for the pypi-jupytext package.
-Group: Default
-Requires: python3-core
-Provides: pypi(jupytext)
-Requires: pypi(markdown_it_py)
-Requires: pypi(mdit_py_plugins)
-Requires: pypi(nbformat)
-Requires: pypi(pyyaml)
-Requires: pypi(toml)
-
-%description python3
-python3 components for the pypi-jupytext package.
-
-
 %prep
 %setup -q -n jupytext-1.14.4
 cd %{_builddir}/jupytext-1.14.4
@@ -105,15 +53,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1670882901
+export SOURCE_DATE_EPOCH=1672286222
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 -m build --wheel --skip-dependency-check --no-isolation
 pushd ../buildavx2/
@@ -152,26 +100,3 @@ rm -f %{buildroot}*/usr/etc/jupyter/nbconfig/notebook.d/jupytext.json
 
 %files
 %defattr(-,root,root,-)
-
-%files bin
-%defattr(-,root,root,-)
-/usr/bin/jupytext
-
-%files data
-%defattr(-,root,root,-)
-/usr/share/jupyter/nbextensions/jupytext/README.md
-/usr/share/jupyter/nbextensions/jupytext/index.js
-/usr/share/jupyter/nbextensions/jupytext/jupytext.yml
-/usr/share/jupyter/nbextensions/jupytext/jupytext_menu.png
-
-%files license
-%defattr(0644,root,root,0755)
-/usr/share/package-licenses/pypi-jupytext/6070800810da89afd1bfd1d32e40f9cb79531c0e
-/usr/share/package-licenses/pypi-jupytext/663d0f732d7e77407322ad0fc528b2c9e9c6bbc5
-
-%files python
-%defattr(-,root,root,-)
-
-%files python3
-%defattr(-,root,root,-)
-/usr/lib/python3*/*
