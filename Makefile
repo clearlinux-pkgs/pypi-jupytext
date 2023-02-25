@@ -1,5 +1,5 @@
 PKG_NAME := pypi-jupytext
-URL = https://files.pythonhosted.org/packages/b5/bb/906e4e32833504e1f0df5ba65fea221f323e8272f0bd60d2f9674627c982/jupytext-1.14.4.tar.gz
+URL = https://files.pythonhosted.org/packages/0a/7f/c495114a3814df1d9d41855e939a6a0cb133a1a11a34a22bde934d115ff4/jupytext-1.14.5.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
