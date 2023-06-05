@@ -5,7 +5,7 @@
 #
 Name     : pypi-jupytext
 Version  : 1.14.6
-Release  : 22
+Release  : 23
 URL      : https://files.pythonhosted.org/packages/fe/b4/1165c57a93626c174459ddfe92fe1a9bb47b450d0e1bcf41010436715d09/jupytext-1.14.6.tar.gz
 Source0  : https://files.pythonhosted.org/packages/fe/b4/1165c57a93626c174459ddfe92fe1a9bb47b450d0e1bcf41010436715d09/jupytext-1.14.6.tar.gz
 Summary  : Jupyter notebooks as Markdown documents, Julia, Python or R scripts
@@ -108,7 +108,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685979421
+export SOURCE_DATE_EPOCH=1686001242
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
