@@ -4,10 +4,10 @@
 # Using build pattern: pyproject
 #
 Name     : pypi-jupytext
-Version  : 1.14.7
-Release  : 25
-URL      : https://files.pythonhosted.org/packages/ec/d3/9e0d8165a2a795d6ee4b60cd6fc353844ce5979525a1613e5d369fc98a44/jupytext-1.14.7.tar.gz
-Source0  : https://files.pythonhosted.org/packages/ec/d3/9e0d8165a2a795d6ee4b60cd6fc353844ce5979525a1613e5d369fc98a44/jupytext-1.14.7.tar.gz
+Version  : 1.15.0
+Release  : 26
+URL      : https://files.pythonhosted.org/packages/2e/eb/867502060a5931dea70a6df6e7c87384ecd6258a38c47d4c39ad0ad8621a/jupytext-1.15.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/2e/eb/867502060a5931dea70a6df6e7c87384ecd6258a38c47d4c39ad0ad8621a/jupytext-1.15.0.tar.gz
 Summary  : Jupyter notebooks as Markdown documents, Julia, Python or R scripts
 Group    : Development/Tools
 License  : MIT
@@ -31,20 +31,7 @@ BuildRequires : pypi(wheel)
 %define debug_package %{nil}
 
 %description
-![](https://raw.githubusercontent.com/mwouts/jupytext/main/docs/logo_large.png)
-![CI](https://github.com/mwouts/jupytext/workflows/CI/badge.svg)
-[![Documentation Status](https://readthedocs.org/projects/jupytext/badge/?version=latest)](https://jupytext.readthedocs.io/en/latest/?badge=latest)
-[![codecov.io](https://codecov.io/github/mwouts/jupytext/coverage.svg?branch=main)](https://codecov.io/gh/mwouts/jupytext/branch/main)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/mwouts/jupytext.svg)](https://lgtm.com/projects/g/mwouts/jupytext/context:python)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![GitHub language count](https://img.shields.io/github/languages/count/mwouts/jupytext)](docs/languages.md)
-[![Conda Version](https://img.shields.io/conda/vn/conda-forge/jupytext.svg)](https://anaconda.org/conda-forge/jupytext)
-[![Pypi](https://img.shields.io/pypi/v/jupytext.svg)](https://pypi.python.org/pypi/jupytext)
-[![pyversions](https://img.shields.io/pypi/pyversions/jupytext.svg)](https://pypi.python.org/pypi/jupytext)
-[![Binder:notebook](https://img.shields.io/badge/binder-notebook-0172B2.svg)](https://mybinder.org/v2/gh/mwouts/jupytext/main?filepath=demo)
-[![Binder:lab](https://img.shields.io/badge/binder-jupyterlab-0172B2.svg)](https://mybinder.org/v2/gh/mwouts/jupytext/main?urlpath=lab/tree/demo/get_started.ipynb)
-[![launch - renku](https://renkulab.io/renku-badge.svg)](https://renkulab.io/projects/best-practices/jupytext/sessions/new?autostart=1)
-[![](https://img.shields.io/badge/YouTube-JupyterCon%202020-red.svg)](https://www.youtube.com/watch?v=SDYdeVfMh48)
+![](https://github.com/mwouts/jupytext/blob/17aea37c612f33a4e27eeee4b81966f1506920fd/docs/images/logo_large.png?raw=true)
 
 %package bin
 Summary: bin components for the pypi-jupytext package.
@@ -97,10 +84,10 @@ python3 components for the pypi-jupytext package.
 
 
 %prep
-%setup -q -n jupytext-1.14.7
-cd %{_builddir}/jupytext-1.14.7
+%setup -q -n jupytext-1.15.0
+cd %{_builddir}/jupytext-1.15.0
 pushd ..
-cp -a jupytext-1.14.7 buildavx2
+cp -a jupytext-1.15.0 buildavx2
 popd
 
 %build
@@ -108,7 +95,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1688138477
+export SOURCE_DATE_EPOCH=1690817081
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
