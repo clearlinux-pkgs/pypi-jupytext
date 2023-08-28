@@ -4,10 +4,10 @@
 # Using build pattern: pyproject
 #
 Name     : pypi-jupytext
-Version  : 1.15.0
-Release  : 26
-URL      : https://files.pythonhosted.org/packages/2e/eb/867502060a5931dea70a6df6e7c87384ecd6258a38c47d4c39ad0ad8621a/jupytext-1.15.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/2e/eb/867502060a5931dea70a6df6e7c87384ecd6258a38c47d4c39ad0ad8621a/jupytext-1.15.0.tar.gz
+Version  : 1.15.1
+Release  : 27
+URL      : https://files.pythonhosted.org/packages/a1/89/197faaa454f041dea5e96d5073e42a981ad42d9352aec191894341d69f54/jupytext-1.15.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/a1/89/197faaa454f041dea5e96d5073e42a981ad42d9352aec191894341d69f54/jupytext-1.15.1.tar.gz
 Summary  : Jupyter notebooks as Markdown documents, Julia, Python or R scripts
 Group    : Development/Tools
 License  : MIT
@@ -84,10 +84,10 @@ python3 components for the pypi-jupytext package.
 
 
 %prep
-%setup -q -n jupytext-1.15.0
-cd %{_builddir}/jupytext-1.15.0
+%setup -q -n jupytext-1.15.1
+cd %{_builddir}/jupytext-1.15.1
 pushd ..
-cp -a jupytext-1.15.0 buildavx2
+cp -a jupytext-1.15.1 buildavx2
 popd
 
 %build
@@ -95,7 +95,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1690817081
+export SOURCE_DATE_EPOCH=1693252012
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -149,6 +149,7 @@ rm -f %{buildroot}*/usr/etc/jupyter/nbconfig/notebook.d/jupytext.json
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/jupytext
+/usr/bin/jupytext-config
 
 %files data
 %defattr(-,root,root,-)
